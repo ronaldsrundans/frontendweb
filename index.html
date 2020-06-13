@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <title>Find Namedays</title>
+  <link href="https://fonts.googleapis.com/css?family=Dosis:400,700" rel="stylesheet">
+  <link href="style.css" rel="stylesheet">
+
+</head>
+
+<body>
+
+  <div id="root"></div>
+
+  <script src="getnames.js"></script>
+  <ul>
+    <li><a href="#nameday">Nameday</a></li>
+    <li><a href="#names">Names</a></li>
+    <li><a href="#week">Week</a></li>
+  </ul>
+  <form>
+    <label for="country">Country:</label>
+    <select name="country" id="country">
+        <option value="cz">cz</option>
+        <option value="sk">sk</option>
+        <option value="pl">pl</option>
+        <option value="fr">fr</option>
+        <option value="hu">hu</option>
+        <option value="hr">hr</option>
+        <option value="se">se</option>
+        <option value="us">us</option>
+        <option value="at">at</option>
+        <option value="it">it</option>
+        <option value="es">es</option>
+        <option value="de">de</option>
+        <option value="dk">dk</option>
+        <option value="fi">fi</option>
+        <option value="bg">bg</option>
+        <option value="lt">lt</option>
+        <option value="ee">ee</option>
+        <option value="lv" selected>lv</option>
+        <option value="gr">gr</option>
+        <option value="lt">ru</option>
+    </select> 
+    <p>
+      <input id="name" type="text">
+      <button type="button" onclick="httpGetNameday()">Find Nameday</button>
+  </p>
+  </form>  
+  <p id="results">
+</p>
+</body>
+
+</html>
