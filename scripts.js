@@ -11,6 +11,7 @@ function openFindTab(evt, openTab) {
   document.getElementById(openTab).style.display = "block";
   evt.currentTarget.className += " active";
 }
+//document.getElementById("defaultOpen").click();
 
 //var countriesArr=[cz, sk, pl, fr, hu, hr, se, us, at, it, es, de, dk, fi, bg, lt, ee, lv, gr, ru ];
 // Create a request variable and assign a new XMLHttpRequest object to it.
