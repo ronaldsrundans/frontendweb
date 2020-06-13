@@ -1,3 +1,9 @@
+//document.getElementById("defaultOpen").click();
+var months = [ "January", "February", "March", "April", "May", "June", 
+           "July", "August", "September", "October", "November", "December" ];
+//var country = document.getElementById("country");
+//var strCountry = country.options[country.selectedIndex].value;
+
 function openFindTab(evt, openTab) {
   var i, tabcontent, tablinks;
   tabcontent = document.getElementsByClassName("tabcontent");
@@ -10,6 +16,29 @@ function openFindTab(evt, openTab) {
   }
   document.getElementById(openTab).style.display = "block";
   evt.currentTarget.className += " active";
+}
+
+function httpGetNameday(){
+  var request = new XMLHttpRequest()
+  var country = document.getElementById("country");
+  var nameinput = document.getElementById("nameday").value;
+  var strCountry = country.options[country.selectedIndex].value;
+  request.open('GET', 'https://api.abalin.net/getdate?name='.concat(nameinput).concat('&country=').concat(strCountry), true)
+  request.onload = function() {
+    var strResult="Result: ";
+    var gotdata = JSON.parse(this.response)
+    for (var i = 0; i < gotdata.results.length; i++) {
+      console.log(gotdata.results[i])
+      strResult+=gotdata.results[i].day;
+      strResult+=" ";
+      var d = new Date();
+      strResult+=months[gotdata.results[i].month-1];
+      strResult+= "\n";
+      
+    }
+    document.getElementById("results").innerHTML=strResult;
+  }
+  request.send()
 }
 //document.getElementById("defaultOpen").click();
 
@@ -60,51 +89,7 @@ function httpGetNames()
     // Send request
     request.send()
 }
-function httpGetNameday(){
-  //container.removeChild(card)
 
-  var request = new XMLHttpRequest()
-      var country = document.getElementById("country");
-      var nameinput = document.getElementById("name").value;
-      //console.log(nameinput);
-     // https://api.abalin.net/getdate?name=John&country=us
-      var strCountry = country.options[country.selectedIndex].value;
-      //console.log(strCountry);
-     // varName=
-    // Open a new connection, using the GET request on the URL endpoint
-    request.open('GET', 'https://api.abalin.net/getdate?name='.concat(nameinput).concat('&country=').concat(strCountry), true)
-
-    request.onload = function() {
-      // Begin accessing JSON data here
-      var gotdata = JSON.parse(this.response)
-      for (var i = 0; i < gotdata.results.length; i++) {
-        console.log(gotdata.results[i])
-      }
-      gotdata.results.forEach(results => {
-        // Log each date
-        console.log(results.day)
-        console.log(results.month)
-        const card = document.createElement('div')
-        //container.removeChild(card)
-
-        card.setAttribute('class', 'card')
-  
-        const h1 = document.createElement('h1')
-        h1.textContent = results.day
-        //h1.textContent = (results.month).getMonth();
-
-        container.appendChild(card)
-        card.appendChild(h1)
-
-
-      })
-      //console.log(gotdata.results[0].day);
-      //console.log(gotdata.results[0].name)
-
-    }
-    request.send()
-
-}
 // Returns an array of dates between the two dates
 var getDates = function(startDate, endDate) {
   var dates = [],
@@ -180,3 +165,4 @@ function loadDoc() {
   xhttp.open("GET", "https://api.abalin.net/getdate?name=John&country=us", true);
   xhttp.send();
 }
+//var defddd=document.getElementById("defaultOpen").click();

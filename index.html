@@ -17,7 +17,7 @@
 
   <script src="scripts.js"></script>
   <div class="tab">
-    <button class="tablinks" onclick="openFindTab(event, 'NamedayTab')">Find Nameday</button>
+    <button class="tablinks" onclick="openFindTab(event, 'NamedayTab')" id="defaultOpen">Find Nameday</button>
     <button class="tablinks" onclick="openFindTab(event, 'NameTab')">Find Names</button>
     <button class="tablinks" onclick="openFindTab(event, 'WeekTab')">Week</button>
     <button class="tablinks" onclick="openFindTab(event, 'RangeTab')">Range</button>
@@ -76,5 +76,7 @@
   </form>  
   <p id="results"></p>
 </body>
-
+<script>
+  document.getElementById("defaultOpen").click();
+</script>
 </html>
