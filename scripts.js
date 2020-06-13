@@ -45,37 +45,30 @@ function httpGetNames(){
   var inputdate = new Date(document.getElementById("date").value).getDate();
   var inputmonth = new Date(document.getElementById("date").value).getMonth()+1;
   var strCountry = country.options[country.selectedIndex].value;
-  //console.log(strCountry);
   request.open('GET', ' https://api.abalin.net/namedays?country='.concat(strCountry).concat('&month=').concat(inputmonth).concat('&day=').concat(inputdate), true)
   request.onload = function() {
-    //var strResult="Result: ";
-    
     var gotdata = JSON.parse(this.response)
-    //console.log(gotdata)
-    var strJon=JSON.stringify(gotdata.data.namedays)
-    //var res = strJon.split(":"); 
-    //console.log(strJon);
-    var obj = JSON.parse(strJon); 
-    //console.log(obj);
-    //console.log(obj[strCountry]);
-   // (obj[strCountry]).forEach(console.log("Hello"));
+    var strgotdata=JSON.stringify(gotdata.data.namedays)
+    var obj = JSON.parse(strgotdata); 
     var res =JSON.stringify(obj[strCountry]);
     res = res.substring(1, res.length - 1);
-    //var s2 = res.substr(1);
     console.log(res);
     var resarray = res.split(", ");
     console.log(resarray);
-    
-
-    //document.getElementById("results").innerHTML=strResult;
-
-        //console.log(data.data.namedays.lv[0])
-     // console.log(data.data.namedays.lv)
-  }
+    document.getElementById("nameresults").innerHTML="";
+    ul = document.createElement('ul');
+    document.getElementById('nameresults').appendChild(ul);
+    resarray.forEach(function (resarray) {
+      let li = document.createElement('li');
+      ul.appendChild(li);
+      li.innerHTML += resarray;
+      });
+    }
   request.send()
 }
 //var countriesArr=[cz, sk, pl, fr, hu, hr, se, us, at, it, es, de, dk, fi, bg, lt, ee, lv, gr, ru ];
 // Create a request variable and assign a new XMLHttpRequest object to it.
+/*
 const app = document.getElementById('root')
 
 const container = document.createElement('div')
@@ -100,7 +93,7 @@ var getDates = function(startDate, endDate) {
   }
   return dates;
 };
-
+*/
 // Usage
 //var startDate=document.getElementById("startDates").value;
   //console.log(startDate);
