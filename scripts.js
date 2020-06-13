@@ -31,17 +31,49 @@ function httpGetNameday(){
       console.log(gotdata.results[i])
       strResult+=gotdata.results[i].day;
       strResult+=" ";
-      var d = new Date();
       strResult+=months[gotdata.results[i].month-1];
-      strResult+= "\n";
-      
+      strResult+="  ";
     }
     document.getElementById("results").innerHTML=strResult;
   }
   request.send()
 }
-//document.getElementById("defaultOpen").click();
 
+function httpGetNames(){
+  var request = new XMLHttpRequest()
+  var country = document.getElementById("country");
+  var inputdate = new Date(document.getElementById("date").value).getDate();
+  var inputmonth = new Date(document.getElementById("date").value).getMonth()+1;
+  var strCountry = country.options[country.selectedIndex].value;
+  //console.log(strCountry);
+  request.open('GET', ' https://api.abalin.net/namedays?country='.concat(strCountry).concat('&month=').concat(inputmonth).concat('&day=').concat(inputdate), true)
+  request.onload = function() {
+    //var strResult="Result: ";
+    
+    var gotdata = JSON.parse(this.response)
+    //console.log(gotdata)
+    var strJon=JSON.stringify(gotdata.data.namedays)
+    //var res = strJon.split(":"); 
+    //console.log(strJon);
+    var obj = JSON.parse(strJon); 
+    //console.log(obj);
+    //console.log(obj[strCountry]);
+   // (obj[strCountry]).forEach(console.log("Hello"));
+    var res =JSON.stringify(obj[strCountry]);
+    res = res.substring(1, res.length - 1);
+    //var s2 = res.substr(1);
+    console.log(res);
+    var resarray = res.split(", ");
+    console.log(resarray);
+    
+
+    //document.getElementById("results").innerHTML=strResult;
+
+        //console.log(data.data.namedays.lv[0])
+     // console.log(data.data.namedays.lv)
+  }
+  request.send()
+}
 //var countriesArr=[cz, sk, pl, fr, hu, hr, se, us, at, it, es, de, dk, fi, bg, lt, ee, lv, gr, ru ];
 // Create a request variable and assign a new XMLHttpRequest object to it.
 const app = document.getElementById('root')
@@ -51,44 +83,7 @@ container.setAttribute('class', 'container')
 
 app.appendChild(container)
 
-function httpGetNames()
-{
-      var request = new XMLHttpRequest()
-      var country = document.getElementById("country");
-      var dateinput = document.getElementById("date").value;
-      var day=dateinput.substring(8, 10);
-      var month=dateinput.substring(5, 7);
-      console.log(day);
-      console.log(month);
-      /*var $dateinput = getElementById("date");*/
-      var strCountry = country.options[country.selectedIndex].value;
-      console.log(strCountry);
 
-    // Open a new connection, using the GET request on the URL endpoint
-    request.open('GET', ' https://api.abalin.net/namedays?country='.concat(strCountry).concat('&month=').concat(month).concat('&day=').concat(day), true)
-
-    request.onload = function() {
-      // Begin accessing JSON data here
-      var gotdata = JSON.parse(this.response)
-
-  
-      /*
-      data.data.namedays forEach(lv => {
-        // Log each movie's title
-        console.log(lv)
-        data.data.namedays=>lv.forEach(lv=> {
-          console.log(lv)
-        })*/
-        for (var i = 0; i < gotdata.data.namedays.lv.length; i++) {
-          console.log(gotdata.data.namedays.lv)
-        }
-        //console.log(data.data.namedays.lv[0])
-     // console.log(data.data.namedays.lv)
-    }
-
-    // Send request
-    request.send()
-}
 
 // Returns an array of dates between the two dates
 var getDates = function(startDate, endDate) {
