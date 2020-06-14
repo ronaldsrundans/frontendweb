@@ -3,9 +3,12 @@
 
 var months = [ "January", "February", "March", "April", "May", "June", 
            "July", "August", "September", "October", "November", "December" ];
-//var country = document.getElementById("country");
+var weekdays = ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"]
+           //var country = document.getElementById("country");
 //var strCountry = country.options[country.selectedIndex].value;
-
+function myTrim(x) {
+  return x.replace(/^\s+|\s+$/gm,'');
+}
 function openFindTab(evt, openTab) {
   var i, tabcontent, tablinks;
   tabcontent = document.getElementsByClassName("tabcontent");
@@ -98,7 +101,7 @@ function getnamesdateRange(){
 
  // console.log(dates[i]);
   var dates = getDates(new Date (startDate), new Date(endDate)); 
-  var gotdata=strgotdata=obj=res=resarray="";
+  var gotdata=strgotdata=obj=res=resarray=restrim="";
   var i=j=0;  
   
   document.getElementById("root").innerHTML="";
@@ -114,7 +117,7 @@ function getnamesdateRange(){
   ul = document.createElement('ul');
   for (i=0;i<dates.length;i++){
     //for (i=0;i<1;i++){
-    console.log(dates[i]);
+    //console.log(dates[i]);
     //console.log(dates[i].getDate());
     //console.log(dates[i].getMonth()+1);
     request.open('GET', 'https://api.abalin.net/namedays?country='.concat(strCountry).concat('&month=').concat(dates[i].getMonth()+1).concat('&day=').concat(dates[i].getDate()), false)
@@ -125,45 +128,38 @@ function getnamesdateRange(){
       strgotdata=JSON.stringify(gotdata.data.namedays)
       obj = JSON.parse(strgotdata); 
       res =JSON.stringify(obj[strCountry]);
+      res=myTrim(res);
       res = res.substring(1, res.length - 1);
+      
+      //.replace("-",",")
       //console.log(res);
-      resarray = res.split(", ");
+      //res=res.trim()
+      resarray = res.split(",");
       //console.log(resarray);
-
-
       const card = document.createElement('div')
       card.setAttribute('class', 'card')
       const h1 = document.createElement('h1')
-      h1.textContent = dates[i];
+      //h1.textContent = dates[i];
+      h1.textContent = weekdays[dates[i].getDay()].concat(" ").concat(dates[i].getDate()).concat(" ").concat(months[dates[i].getMonth()]);
+      /*console.log(weekdays[dates[i].getDay()]);
+      console.log(dates[i].getDate());
+      console.log(months[dates[i].getMonth()]);*/
       const p = document.createElement('p')
-
-
-      
-    document.getElementById('rangeresults').appendChild(ul);
-    resarray.forEach(function (resarray) {
-      let li = document.createElement('li');
-      ul.appendChild(li);
-      li.innerHTML += resarray; 
-      p.appendChild(li);
-    });
-    //p.textContent = resarray;
-   
-    container.appendChild(card)
-    card.appendChild(h1)
-    card.appendChild(p)
-    //}
-      /*for (j=0;j<resarray.length;j++){
-        console.log(resarray[j]);
-      }
-      
-      for (var i = 0; i < gotdata.data.namedays.length; i++) {
-        console.log(gotdata.data.namedays)
-      }*/
-
-
+      document.getElementById('rangeresults').appendChild(ul);
+      resarray.forEach(function (resarray) {
+        let li = document.createElement('li');
+        ul.appendChild(li);
+        li.innerHTML += resarray;
+        p.appendChild(li);
+      });
+      container.appendChild(card)
+      card.appendChild(h1)
+      card.appendChild(p)
     }
     request.send()
-
-
   }
-}                               
+}       
+
+function getnamesweek(){
+
+}                        
