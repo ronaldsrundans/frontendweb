@@ -1,4 +1,6 @@
 //document.getElementById("defaultOpen").click();
+//document.getElementById('date').value = new Date().toDateInputValue();
+
 var months = [ "January", "February", "March", "April", "May", "June", 
            "July", "August", "September", "October", "November", "December" ];
 //var country = document.getElementById("country");
@@ -19,6 +21,7 @@ function openFindTab(evt, openTab) {
 }
 
 function httpGetNameday(){
+  document.getElementById("namedayresults").innerHTML="";
   var request = new XMLHttpRequest()
   var country = document.getElementById("country");
   var nameinput = document.getElementById("nameday").value;
@@ -34,7 +37,9 @@ function httpGetNameday(){
       strResult+=months[gotdata.results[i].month-1];
       strResult+="  ";
     }
-    document.getElementById("results").innerHTML=strResult;
+    //document.getElementById("results").innerHTML=strResult;
+    document.getElementById("namedayresults").innerHTML=strResult;
+
   }
   request.send()
 }
@@ -66,19 +71,6 @@ function httpGetNames(){
     }
   request.send()
 }
-//var countriesArr=[cz, sk, pl, fr, hu, hr, se, us, at, it, es, de, dk, fi, bg, lt, ee, lv, gr, ru ];
-// Create a request variable and assign a new XMLHttpRequest object to it.
-/*
-const app = document.getElementById('root')
-
-const container = document.createElement('div')
-container.setAttribute('class', 'container')
-
-app.appendChild(container)
-
-
-
-// Returns an array of dates between the two dates
 var getDates = function(startDate, endDate) {
   var dates = [],
       currentDate = startDate,
@@ -93,28 +85,20 @@ var getDates = function(startDate, endDate) {
   }
   return dates;
 };
-*/
-// Usage
-//var startDate=document.getElementById("startDates").value;
-  //console.log(startDate);
 
-/*
-var dates = getDates(new Date ("2020,06,01"), new Date("2020,06,10"));                                                                                                           
-dates.forEach(function(date) {
-  //console.log(date);
-});
-*/
-
-function changeel(){
+function getnamesdateRange(){
   var request = new XMLHttpRequest()
-      var country = document.getElementById("country");
-      var strCountry = country.options[country.selectedIndex].value;
-      //console.log(strCountry);
-      var startDate= document.getElementById("startDates").value.replace("-",",").replace("-",",");
-  var endDate = document.getElementById("endDates").value.replace("-",",").replace("-",",");
- // console.log(startDate);
+  var country = document.getElementById("country");
+  var strCountry = country.options[country.selectedIndex].value;
+  //console.log(strCountry);
+  var startDate= document.getElementById("startdate").value.replace("-",",").replace("-",",");
+  var endDate = document.getElementById("enddate").value.replace("-",",").replace("-",",");
+  //console.log(startDate);
+  //console.log(endDate);
+
  // console.log(dates[i]);
-  var dates = getDates(new Date (startDate), new Date(endDate));                                                                                                           
+  var dates = getDates(new Date (startDate), new Date(endDate)); 
+
   for (i=0;i<dates.length;i++){
     //console.log(dates[i]);
     //console.log(dates[i].getDate());
@@ -136,7 +120,36 @@ function changeel(){
 
 
   }
-} 
+}                                                                                                          
+
+
+//var countriesArr=[cz, sk, pl, fr, hu, hr, se, us, at, it, es, de, dk, fi, bg, lt, ee, lv, gr, ru ];
+// Create a request variable and assign a new XMLHttpRequest object to it.
+/*
+const app = document.getElementById('root')
+
+const container = document.createElement('div')
+container.setAttribute('class', 'container')
+
+app.appendChild(container)
+
+
+
+// Returns an array of dates between the two dates
+
+*/
+// Usage
+//var startDate=document.getElementById("startDates").value;
+  //console.log(startDate);
+
+/*
+var dates = getDates(new Date ("2020,06,01"), new Date("2020,06,10"));                                                                                                           
+dates.forEach(function(date) {
+  //console.log(date);
+});
+*/
+
+
 
  // getDates();
 //document.getElementById("demo1").innerHTML = "Hello World!";

@@ -15,9 +15,9 @@
   <script src="scripts.js"></script>
   <div class="tab">
     <button class="tablinks" onclick="openFindTab(event, 'NamedayTab')" >Find Nameday</button>
-    <button class="tablinks" onclick="openFindTab(event, 'NameTab')" id="defaultOpen">Find Names</button>
+    <button class="tablinks" onclick="openFindTab(event, 'NameTab')">Find Names</button>
     <button class="tablinks" onclick="openFindTab(event, 'WeekTab')">Week</button>
-    <button class="tablinks" onclick="openFindTab(event, 'RangeTab')">Range</button>
+    <button class="tablinks" onclick="openFindTab(event, 'RangeTab')" id="defaultOpen">Range</button>
 
     <form>
       <div class="select">
@@ -71,7 +71,11 @@
     </div>
 
     <div id="RangeTab" class="tabcontent">
-      <p>Range info</p>
+      <p>
+        <input id="startdate" type="date">
+        <input id="enddate" type="date">
+        <button type="button" onclick="getnamesdateRange()">Find Names</button>
+    </p>
     </div>
 
   </form>  
@@ -81,5 +85,7 @@
 </body>
 <script>
   document.getElementById("defaultOpen").click();
+ // document.getElementById('date') = new Date().toDateInputValue();
+
 </script>
 </html>
