@@ -18,7 +18,7 @@ function openFindTab(evt, openTab) {
   }
   document.getElementById(openTab).style.display = "block";
   evt.currentTarget.className += " active";
-}
+};
 
 function httpGetNameday(){
   document.getElementById("namedayresults").innerHTML="";
@@ -99,8 +99,18 @@ function getnamesdateRange(){
  // console.log(dates[i]);
   var dates = getDates(new Date (startDate), new Date(endDate)); 
   var gotdata=strgotdata=obj=res=resarray="";
+  var i=j=0;
+  const app = document.getElementById('root')
+  const container = document.createElement('div')
+  container.setAttribute('class', 'container')
+  app.appendChild(container)
+
+
+  document.getElementById("rangeresults").innerHTML="";
+  ul = document.createElement('ul');
   for (i=0;i<dates.length;i++){
-    //console.log(dates[i]);
+    //for (i=0;i<1;i++){
+    console.log(dates[i]);
     //console.log(dates[i].getDate());
     //console.log(dates[i].getMonth()+1);
     request.open('GET', 'https://api.abalin.net/namedays?country='.concat(strCountry).concat('&month=').concat(dates[i].getMonth()+1).concat('&day=').concat(dates[i].getDate()), false)
@@ -115,7 +125,32 @@ function getnamesdateRange(){
       //console.log(res);
       resarray = res.split(", ");
       console.log(resarray);
-      /*
+
+
+      const card = document.createElement('div')
+      card.setAttribute('class', 'card')
+      const h1 = document.createElement('h1')
+      h1.textContent = dates[i];
+      const p = document.createElement('p')
+
+
+      
+    document.getElementById('rangeresults').appendChild(ul);
+    resarray.forEach(function (resarray) {
+      let li = document.createElement('li');
+      ul.appendChild(li);
+      li.innerHTML += resarray;
+      });
+      p.textContent = resarray;
+      container.appendChild(card)
+      card.appendChild(h1)
+      card.appendChild(p)
+    //}
+      /*for (j=0;j<resarray.length;j++){
+        console.log(resarray[j]);
+
+      }
+      
       for (var i = 0; i < gotdata.data.namedays.length; i++) {
         console.log(gotdata.data.namedays)
       }*/
@@ -129,47 +164,4 @@ function getnamesdateRange(){
 }                                                                                                          
 
 
-//var countriesArr=[cz, sk, pl, fr, hu, hr, se, us, at, it, es, de, dk, fi, bg, lt, ee, lv, gr, ru ];
-// Create a request variable and assign a new XMLHttpRequest object to it.
-/*
-const app = document.getElementById('root')
 
-const container = document.createElement('div')
-container.setAttribute('class', 'container')
-
-app.appendChild(container)
-
-
-
-// Returns an array of dates between the two dates
-
-*/
-// Usage
-//var startDate=document.getElementById("startDates").value;
-  //console.log(startDate);
-
-/*
-var dates = getDates(new Date ("2020,06,01"), new Date("2020,06,10"));                                                                                                           
-dates.forEach(function(date) {
-  //console.log(date);
-});
-*/
-
-
-
- // getDates();
-//document.getElementById("demo1").innerHTML = "Hello World!";
-//console.log(getSDates());
-function loadDoc() {
-  var xhttp = new XMLHttpRequest();
-  xhttp.onreadystatechange = function() {
-    if (this.readyState == 4 && this.status == 200) {
-      //document.getElementById("demo").innerHTML = this.responseText;
-      console.log(this);
-
-    }
-  };
-  xhttp.open("GET", "https://api.abalin.net/getdate?name=John&country=us", true);
-  xhttp.send();
-}
-//var defddd=document.getElementById("defaultOpen").click();
