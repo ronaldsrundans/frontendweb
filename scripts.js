@@ -98,7 +98,7 @@ function getnamesdateRange(){
 
  // console.log(dates[i]);
   var dates = getDates(new Date (startDate), new Date(endDate)); 
-
+  var gotdata=strgotdata=obj=res=resarray="";
   for (i=0;i<dates.length;i++){
     //console.log(dates[i]);
     //console.log(dates[i].getDate());
@@ -106,9 +106,15 @@ function getnamesdateRange(){
     request.open('GET', 'https://api.abalin.net/namedays?country='.concat(strCountry).concat('&month=').concat(dates[i].getMonth()+1).concat('&day=').concat(dates[i].getDate()), false)
     request.onload = function() {
       // Begin accessing JSON data here
-      var gotdata = JSON.parse(this.response)
-      console.log(gotdata)
-      
+      gotdata = JSON.parse(this.response)
+      //console.log(gotdata)
+      strgotdata=JSON.stringify(gotdata.data.namedays)
+      obj = JSON.parse(strgotdata); 
+      res =JSON.stringify(obj[strCountry]);
+      res = res.substring(1, res.length - 1);
+      //console.log(res);
+      resarray = res.split(", ");
+      console.log(resarray);
       /*
       for (var i = 0; i < gotdata.data.namedays.length; i++) {
         console.log(gotdata.data.namedays)
