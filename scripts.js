@@ -99,7 +99,10 @@ function getnamesdateRange(){
  // console.log(dates[i]);
   var dates = getDates(new Date (startDate), new Date(endDate)); 
   var gotdata=strgotdata=obj=res=resarray="";
-  var i=j=0;
+  var i=j=0;  
+  
+  document.getElementById("root").innerHTML="";
+
   const app = document.getElementById('root')
   const container = document.createElement('div')
   container.setAttribute('class', 'container')
@@ -107,6 +110,7 @@ function getnamesdateRange(){
 
 
   document.getElementById("rangeresults").innerHTML="";
+
   ul = document.createElement('ul');
   for (i=0;i<dates.length;i++){
     //for (i=0;i<1;i++){
@@ -124,7 +128,7 @@ function getnamesdateRange(){
       res = res.substring(1, res.length - 1);
       //console.log(res);
       resarray = res.split(", ");
-      console.log(resarray);
+      //console.log(resarray);
 
 
       const card = document.createElement('div')
@@ -139,16 +143,17 @@ function getnamesdateRange(){
     resarray.forEach(function (resarray) {
       let li = document.createElement('li');
       ul.appendChild(li);
-      li.innerHTML += resarray;
-      });
-      p.textContent = resarray;
-      container.appendChild(card)
-      card.appendChild(h1)
-      card.appendChild(p)
+      li.innerHTML += resarray; 
+      p.appendChild(li);
+    });
+    //p.textContent = resarray;
+   
+    container.appendChild(card)
+    card.appendChild(h1)
+    card.appendChild(p)
     //}
       /*for (j=0;j<resarray.length;j++){
         console.log(resarray[j]);
-
       }
       
       for (var i = 0; i < gotdata.data.namedays.length; i++) {
@@ -161,7 +166,4 @@ function getnamesdateRange(){
 
 
   }
-}                                                                                                          
-
-
-
+}                               
