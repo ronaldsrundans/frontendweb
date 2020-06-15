@@ -16,8 +16,8 @@
   <div class="tab">
     <button class="tablinks" onclick="openFindTab(event, 'NamedayTab')" >Find Nameday</button>
     <button class="tablinks" onclick="openFindTab(event, 'NameTab')">Find Names</button>
-    <button class="tablinks" onclick="openFindTab(event, 'WeekTab')">Week</button>
-    <button class="tablinks" onclick="openFindTab(event, 'RangeTab')" id="defaultOpen">Range</button>
+    <button class="tablinks" onclick="openFindTab(event, 'WeekTab')" id="defaultOpen">Week</button>
+    <button class="tablinks" onclick="openFindTab(event, 'RangeTab')">Range</button>
 
     <form>
       <div class="select">
@@ -67,7 +67,11 @@
     </div>
     
     <div id="WeekTab" class="tabcontent">
-      <p>Missing Week info</p>
+      <p>
+
+        <button type="button" onclick="getnamesweek()">Get This Week</button>
+
+      </p>
     </div>
 
     <div id="RangeTab" class="tabcontent">
