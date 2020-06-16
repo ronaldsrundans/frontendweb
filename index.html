@@ -52,7 +52,8 @@
       <p>
         <input id="nameday" type="text">
         <button type="button" onclick="httpGetNameday()">Find Nameday</button>
-    </p>
+        
+      </p>
     <p id="namedayresults"></p>
 
     </div>
@@ -61,7 +62,8 @@
         <p>
             <input id="date" type="date">
             <button type="button" onclick="httpGetNames()">Find Names</button>
-        </p>
+
+          </p>
         <div id="nameresults"></div>
 
     </div>
@@ -70,7 +72,6 @@
       <p>
 
         <button type="button" onclick="getnamesweek()">Get This Week</button>
-
       </p>
       <div id="weekresults"></div>
 
@@ -78,10 +79,13 @@
 
     <div id="RangeTab" class="tabcontent">
       <p>
-        <input id="startdate" type="date">
+        <input id="startdate" type="date" data-date-format="DD-MM-YYYY">
         <input id="enddate" type="date">
         <button type="button" onclick="getnamesdateRange()">Find Names</button>
-    </p>
+
+    
+    
+      </p>
     <div id="root"></div>
     <div id="rangeresults"></div>
 

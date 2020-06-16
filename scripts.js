@@ -1,5 +1,5 @@
-//document.getElementById("defaultOpen").click();
-//document.getElementById('date').value = new Date().toDateInputValue();
+//var countryG = document.getElementById("country");
+//var strCountryG = countryG.options[countryG.selectedIndex].value;
 
 var months = [ "January", "February", "March", "April", "May", "June", 
            "July", "August", "September", "October", "November", "December" ];
@@ -168,13 +168,14 @@ function getnamesweek(){
   var n = new Date();
   var nstart = new Date();
   var nend = new Date();
-   var weekdaytoday=d.getDay();
-  nstart.setDate(d.getDate()-weekdaytoday);
-  nend.setDate(d.getDate()-weekdaytoday+6);
+  d.setDate(d.getDate());
+  var weekdaytoday=d.getDay();
+  nstart.setDate(d.getDate()-weekdaytoday+1);
+  nend.setDate(d.getDate()-weekdaytoday+6+1);
   //console.log(nstart);
   //console.log(nend);
   var dates = getDates(nstart, nend); 
-  console.log(dates);
+  //console.log(dates);
 
   var gotdata=strgotdata=obj=res=resarray=restrim="";
   var i=j=0;  
@@ -229,60 +230,5 @@ function getnamesweek(){
     }
     request.send()
 
-  }//end of for
-    /*
-   
-    console.log(dates[i]);
-    //console.log(dates[i].getDate());
-    //console.log(dates[i].getMonth()+1);
-    request.open('GET', 'https://api.abalin.net/namedays?country='.concat(strCountry).concat('&month=').concat(dates[i].getMonth()+1).concat('&day=').concat(dates[i].getDate()), false)
-    request.onload = function() {
-      // Begin accessing JSON data here
-      gotdata = JSON.parse(this.response)
-      console.log(gotdata)
-      strgotdata=JSON.stringify(gotdata.data.namedays)
-      obj = JSON.parse(strgotdata); 
-      res =JSON.stringify(obj[strCountry]);
-      res=myTrim(res);
-      res = res.substring(1, res.length - 1);
-      
-      //.replace("-",",")
-      //console.log(res);
-      //res=res.trim()
-      resarray = res.split(",");
-      //console.log(resarray);
-      const card = document.createElement('div')
-      card.setAttribute('class', 'card')
-      const h1 = document.createElement('h1')
-      //h1.textContent = dates[i];
-      h1.textContent = weekdays[dates[i].getDay()].concat(" ").concat(dates[i].getDate()).concat(" ").concat(months[dates[i].getMonth()]);
-      /*console.log(weekdays[dates[i].getDay()]);
-      console.log(dates[i].getDate());
-      console.log(months[dates[i].getMonth()]);*/
-      /*
-      const p = document.createElement('p')
-      document.getElementById('rangeresults').appendChild(ul);
-      resarray.forEach(function (resarray) {
-        let li = document.createElement('li');
-        ul.appendChild(li);
-        li.innerHTML += resarray;
-        p.appendChild(li);
-      });
-      container.appendChild(card)
-      card.appendChild(h1)
-      card.appendChild(p)
-    }
-    request.send()
-  }*/
-  //for
-
-
+  }
 }
-
-
-/*
-<input type="text" name="input" placeholder="YYYY-MM-DD" required 
-pattern="(?:19|20)\[0-9\]{2}-(?:(?:0\[1-9\]|1\[0-2\])-(?:0\[1-9\]|1\[0-9\]|2\[0-9\])|(?:(?!02)(?:0\[1-9\]|1\[0-2\])-(?:30))|(?:(?:0\[13578\]|1\[02\])-31))" 
-title="Enter a date in this format YYYY-MM-DD"/>
-
- <input type="submit">*/
