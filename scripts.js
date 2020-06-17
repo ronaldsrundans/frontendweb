@@ -8,8 +8,8 @@ function myTrim(x) {
 function trimResponse(objJSON, strCountry){
   strobjJSON=JSON.stringify(objJSON.data.namedays)
   var objstrobjJSON = JSON.parse(strobjJSON); 
-  var strobjstrobjJSON =JSON.stringify(objstrobjJSON[strCountry]);
-  var strobjstrobjJSON=myTrim(strobjstrobjJSON);
+  var strobjstrobjJSON = JSON.stringify(objstrobjJSON[strCountry]);
+  var strobjstrobjJSON = myTrim(strobjstrobjJSON);
   var strobjstrobjJSON = strobjstrobjJSON.substring(1, strobjstrobjJSON.length - 1);
   var resultArray = strobjstrobjJSON.split(",");
   return resultArray;
@@ -40,10 +40,10 @@ function httpGetNameday(){
     var strResult="Result: ";
     var gotdata = JSON.parse(this.response)
     for (var i = 0; i < gotdata.results.length; i++) {
-      strResult+=gotdata.results[i].day;
-      strResult+=" ";
-      strResult+=months[gotdata.results[i].month-1];
-      strResult+="  ";
+      strResult += gotdata.results[i].day;
+      strResult += " ";
+      strResult += months[gotdata.results[i].month-1];
+      strResult += "  ";
     }
     document.getElementById("namedayresults").innerHTML=strResult;
   }
@@ -72,9 +72,7 @@ function httpGetNames(){
         });
       }
       else {
-        const errorMessage = document.createElement('marquee')
-        errorMessage.textContent = `Gah, it's not working!`
-        app.appendChild(errorMessage)
+        document.getElementById("nameresults").innerHTML="Something went wrong with the GET request!";
       }
     }
   request.send()
@@ -103,7 +101,7 @@ function getnamesdateRange(){
   var endDate = document.getElementById("enddate").value.replace("-",",").replace("-",",");
   var dates = getDates(new Date (startDate), new Date(endDate)); 
   var gotdata = "";
-  var namesArray = [];
+  var namesarray = [];
   var i = j = 0;  
   document.getElementById("rangeresults").innerHTML="";
   const app = document.getElementById('rangeresults')
@@ -116,17 +114,17 @@ function getnamesdateRange(){
     request.onload = function() {
       gotdata = JSON.parse(this.response)
       if (request.status >= 200 && request.status < 400) {
-        namesArray = trimResponse(gotdata,strCountry);
+        namesarray = trimResponse(gotdata,strCountry);
         const card = document.createElement('div')
         card.setAttribute('class', 'card')
         const h1 = document.createElement('h1')
         h1.textContent = weekdays[dates[i].getDay()].concat(" ").concat(dates[i].getDate()).concat(" ").concat(months[dates[i].getMonth()]);
         const p = document.createElement('p')
         document.getElementById('rangeresults').appendChild(ul);
-        namesArray.forEach(function (namesArray) {
+        namesarray.forEach(function (namesarray) {
           let li = document.createElement('li');
           ul.appendChild(li);
-          li.innerHTML += namesArray;
+          li.innerHTML += namesarray;
           p.appendChild(li);
         });
         container.appendChild(card)
@@ -134,9 +132,7 @@ function getnamesdateRange(){
         card.appendChild(p)
       }
       else {
-        const errorMessage = document.getElementById('rangeresults')
-        errorMessage.textContent = 'Something went wrong.'
-        app.appendChild(errorMessage)
+        document.getElementById("nameresults").innerHTML="Something went wrong with the GET request!";
       }
     }
     request.send()
@@ -188,9 +184,7 @@ function getnamesweek(){
         card.appendChild(p)
       }
       else {
-        const errorMessage = document.createElement('marquee')
-        errorMessage.textContent = `Gah, it's not working!`
-        app.appendChild(errorMessage)
+        document.getElementById("nameresults").innerHTML="Something went wrong with the GET request!";
       }
     }
     request.send()
