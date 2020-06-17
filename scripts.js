@@ -1,14 +1,11 @@
-//var countryG = document.getElementById("country");
-//var strCountryG = countryG.options[countryG.selectedIndex].value;
-
 var months = [ "January", "February", "March", "April", "May", "June", 
            "July", "August", "September", "October", "November", "December" ];
 var weekdays = ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"]
-           //var country = document.getElementById("country");
-//var strCountry = country.options[country.selectedIndex].value;
+
 function myTrim(x) {
   return x.replace(/^\s+|\s+$/gm,'');
 }
+
 function openFindTab(evt, openTab) {
   var i, tabcontent, tablinks;
   tabcontent = document.getElementsByClassName("tabcontent");
@@ -26,7 +23,7 @@ function openFindTab(evt, openTab) {
 function httpGetNameday(){
   document.getElementById("namedayresults").innerHTML="";
   var request = new XMLHttpRequest()
-  var country = document.getElementById("country");
+  var strCountry = document.getElementById("country");
   var nameinput = document.getElementById("nameday").value;
   var strCountry = country.options[country.selectedIndex].value;
   request.open('GET', 'https://api.abalin.net/getdate?name='.concat(nameinput).concat('&country=').concat(strCountry), true)
@@ -40,9 +37,7 @@ function httpGetNameday(){
       strResult+=months[gotdata.results[i].month-1];
       strResult+="  ";
     }
-    //document.getElementById("results").innerHTML=strResult;
     document.getElementById("namedayresults").innerHTML=strResult;
-
   }
   request.send()
 }
@@ -61,7 +56,7 @@ function httpGetNames(){
     var res =JSON.stringify(obj[strCountry]);
     res = res.substring(1, res.length - 1);
     console.log(res);
-    var resarray = res.split(", ");
+    var resarray = res.split(",");
     console.log(resarray);
     document.getElementById("nameresults").innerHTML="";
     ul = document.createElement('ul');
@@ -93,63 +88,37 @@ function getnamesdateRange(){
   var request = new XMLHttpRequest()
   var country = document.getElementById("country");
   var strCountry = country.options[country.selectedIndex].value;
-  //console.log(strCountry);
   var startDate= document.getElementById("startdate").value.replace("-",",").replace("-",",");
   var endDate = document.getElementById("enddate").value.replace("-",",").replace("-",",");
-  //console.log(startDate);
-  //console.log(endDate);
-
- // console.log(dates[i]);
   var dates = getDates(new Date (startDate), new Date(endDate)); 
   var gotdata=strgotdata=obj=res=resarray=restrim="";
   var i=j=0;  
-  
-  document.getElementById("root").innerHTML="";
-
-  const app = document.getElementById('root')
+  document.getElementById("rangeresults").innerHTML="";
+  const app = document.getElementById('rangeresults')
   const container = document.createElement('div')
   container.setAttribute('class', 'container')
   app.appendChild(container)
-
-
-  document.getElementById("rangeresults").innerHTML="";
-
   ul = document.createElement('ul');
   for (i=0;i<dates.length;i++){
-    //for (i=0;i<1;i++){
-    //console.log(dates[i]);
-    //console.log(dates[i].getDate());
-    //console.log(dates[i].getMonth()+1);
     request.open('GET', 'https://api.abalin.net/namedays?country='.concat(strCountry).concat('&month=').concat(dates[i].getMonth()+1).concat('&day=').concat(dates[i].getDate()), false)
     request.onload = function() {
-      // Begin accessing JSON data here
       gotdata = JSON.parse(this.response)
-      //console.log(gotdata)
       strgotdata=JSON.stringify(gotdata.data.namedays)
-      obj = JSON.parse(strgotdata); 
-      res =JSON.stringify(obj[strCountry]);
-      res=myTrim(res);
-      res = res.substring(1, res.length - 1);
-      
-      //.replace("-",",")
-      //console.log(res);
-      //res=res.trim()
-      resarray = res.split(",");
-      //console.log(resarray);
+      objstrgotdata = JSON.parse(strgotdata); 
+      strobjstrgotdata =JSON.stringify(objstrgotdata[strCountry]);
+      strobjstrgotdata=myTrim(strobjstrgotdata);
+      strobjstrgotdata = strobjstrgotdata.substring(1, strobjstrgotdata.length - 1);
+      namesArray = strobjstrgotdata.split(",");
       const card = document.createElement('div')
       card.setAttribute('class', 'card')
       const h1 = document.createElement('h1')
-      //h1.textContent = dates[i];
       h1.textContent = weekdays[dates[i].getDay()].concat(" ").concat(dates[i].getDate()).concat(" ").concat(months[dates[i].getMonth()]);
-      /*console.log(weekdays[dates[i].getDay()]);
-      console.log(dates[i].getDate());
-      console.log(months[dates[i].getMonth()]);*/
       const p = document.createElement('p')
       document.getElementById('rangeresults').appendChild(ul);
-      resarray.forEach(function (resarray) {
+      namesArray.forEach(function (namesArray) {
         let li = document.createElement('li');
         ul.appendChild(li);
-        li.innerHTML += resarray;
+        li.innerHTML += namesArray;
         p.appendChild(li);
       });
       container.appendChild(card)
@@ -172,56 +141,36 @@ function getnamesweek(){
   var weekdaytoday=d.getDay();
   nstart.setDate(d.getDate()-weekdaytoday+1);
   nend.setDate(d.getDate()-weekdaytoday+6+1);
-  //console.log(nstart);
-  //console.log(nend);
   var dates = getDates(nstart, nend); 
-  //console.log(dates);
-
   var gotdata=strgotdata=obj=res=resarray=restrim="";
-  var i=j=0;  
-  
+  var i=j=0;    
   document.getElementById("weekresults").innerHTML="";
-
   const app = document.getElementById('weekresults')
   const container = document.createElement('div')
   container.setAttribute('class', 'container')
   app.appendChild(container)
-
-
   document.getElementById("rangeresults").innerHTML="";
-
   ul = document.createElement('ul');
   for (i=0;i<7;i++){
     request.open('GET', 'https://api.abalin.net/namedays?country='.concat(strCountry).concat('&month=').concat(dates[i].getMonth()+1).concat('&day=').concat(dates[i].getDate()), false)
     request.onload = function() {
-      // Begin accessing JSON data here
       gotdata = JSON.parse(this.response)
-      //console.log(gotdata)
       strgotdata=JSON.stringify(gotdata.data.namedays)
-      obj = JSON.parse(strgotdata); 
-      res =JSON.stringify(obj[strCountry]);
-      res=myTrim(res);
-      res = res.substring(1, res.length - 1);
-      
-      //.replace("-",",")
-      //console.log(res);
-      //res=res.trim()
-      resarray = res.split(",");
-      //console.log(resarray);
+      objstrgotdata = JSON.parse(strgotdata); 
+      strobjstrgotdata =JSON.stringify(objstrgotdata[strCountry]);
+      strobjstrgotdata=myTrim(strobjstrgotdata);
+      strobjstrgotdata = strobjstrgotdata.substring(1, strobjstrgotdata.length - 1);
+      namesArray = strobjstrgotdata.split(",");
       const card = document.createElement('div')
       card.setAttribute('class', 'card')
       const h1 = document.createElement('h1')
-      //h1.textContent = dates[i];
       h1.textContent = weekdays[dates[i].getDay()].concat(" ").concat(dates[i].getDate()).concat(" ").concat(months[dates[i].getMonth()]);
-      /*console.log(weekdays[dates[i].getDay()]);
-      console.log(dates[i].getDate());
-      console.log(months[dates[i].getMonth()]);*/
       const p = document.createElement('p')
       document.getElementById('rangeresults').appendChild(ul);
-      resarray.forEach(function (resarray) {
+      namesArray.forEach(function (namesArray) {
         let li = document.createElement('li');
         ul.appendChild(li);
-        li.innerHTML += resarray;
+        li.innerHTML += namesArray;
         p.appendChild(li);
       });
       container.appendChild(card)
@@ -229,6 +178,5 @@ function getnamesweek(){
       card.appendChild(p)
     }
     request.send()
-
   }
 }

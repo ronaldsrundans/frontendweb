@@ -14,9 +14,9 @@
 <body>
   <script src="scripts.js"></script>
   <div class="tab">
-    <button class="tablinks" onclick="openFindTab(event, 'NamedayTab')" >Find Nameday</button>
+    <button class="tablinks" onclick="openFindTab(event, 'NamedayTab')" id="defaultOpen">Find Nameday</button>
     <button class="tablinks" onclick="openFindTab(event, 'NameTab')">Find Names</button>
-    <button class="tablinks" onclick="openFindTab(event, 'WeekTab')" id="defaultOpen">Week</button>
+    <button class="tablinks" onclick="openFindTab(event, 'WeekTab')" >Week</button>
     <button class="tablinks" onclick="openFindTab(event, 'RangeTab')">Range</button>
 
     <form>
@@ -55,6 +55,7 @@
         
       </p>
     <p id="namedayresults"></p>
+    <p id="namedayresults2"></p>
 
     </div>
     
@@ -62,7 +63,6 @@
         <p>
             <input id="date" type="date">
             <button type="button" onclick="httpGetNames()">Find Names</button>
-
           </p>
         <div id="nameresults"></div>
 
@@ -70,27 +70,19 @@
     
     <div id="WeekTab" class="tabcontent">
       <p>
-
         <button type="button" onclick="getnamesweek()">Get This Week</button>
       </p>
       <div id="weekresults"></div>
-
     </div>
 
     <div id="RangeTab" class="tabcontent">
       <p>
         <input id="startdate" type="date" data-date-format="DD-MM-YYYY">
         <input id="enddate" type="date">
-        <button type="button" onclick="getnamesdateRange()">Find Names</button>
-
-    
-    
+        <button type="button" onclick="getnamesdateRange()">Find Names</button>    
       </p>
-    <div id="root"></div>
     <div id="rangeresults"></div>
-
     </div>
-
   </form>  
   <p id="results"></p>
   
@@ -98,7 +90,5 @@
 </body>
 <script>
   document.getElementById("defaultOpen").click();
- // document.getElementById('date') = new Date().toDateInputValue();
-
 </script>
 </html>
