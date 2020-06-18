@@ -13,40 +13,41 @@
 
 <body>
   <script src="scripts.js"></script>
-  <div class="tab">
-    <button class="tablinks" onclick="openFindTab(event, 'NamedayTab')" id="defaultOpen">Find Nameday</button>
-    <button class="tablinks" onclick="openFindTab(event, 'NameTab')">Find Names</button>
-    <button class="tablinks" onclick="openFindTab(event, 'WeekTab')" >Week</button>
-    <button class="tablinks" onclick="openFindTab(event, 'RangeTab')">Range</button>
+ 
+    <div class="tab">
+      <button class="tablinks" onclick="openFindTab(event, 'NamedayTab')" id="defaultOpen">Find Nameday</button>
+      <button class="tablinks" onclick="openFindTab(event, 'NameTab')">Find Names</button>
+      <button class="tablinks" onclick="openFindTab(event, 'WeekTab')" >Week</button>
+      <button class="tablinks" onclick="openFindTab(event, 'RangeTab')">Range</button>
 
     <form>
       <div class="select">
-
-    <label for="country">Country:</label>
-    <select name="country" id="country">
-        <option value="cz">cz</option>
-        <option value="sk">sk</option>
-        <option value="pl">pl</option>
-        <option value="fr">fr</option>
-        <option value="hu">hu</option>
-        <option value="hr">hr</option>
-        <option value="se">se</option>
-        <option value="us">us</option>
-        <option value="at">at</option>
-        <option value="it">it</option>
-        <option value="es">es</option>
-        <option value="de">de</option>
-        <option value="dk">dk</option>
-        <option value="fi">fi</option>
-        <option value="bg">bg</option>
-        <option value="lt">lt</option>
-        <option value="ee">ee</option>
-        <option value="lv" selected>lv</option>
-        <option value="gr">gr</option>
-        <option value="ru">ru</option>
-    </select> 
-    </div>
-    </div>
+        <label for="country">Country:</label>
+          <select name="country" id="country">
+            <option value="cz">cz</option>
+            <option value="sk">sk</option>
+            <option value="pl">pl</option>
+            <option value="fr">fr</option>
+            <option value="hu">hu</option>
+            <option value="hr">hr</option>
+            <option value="se">se</option>
+            <option value="us">us</option>
+            <option value="at">at</option>
+            <option value="it">it</option>
+            <option value="es">es</option>
+            <option value="de">de</option>
+            <option value="dk">dk</option>
+            <option value="fi">fi</option>
+            <option value="bg">bg</option>
+            <option value="lt">lt</option>
+            <option value="ee">ee</option>
+            <option value="lv" selected>lv</option>
+            <option value="gr">gr</option>
+            <option value="ru">ru</option>
+         </select> 
+      </div>
+     </div>
+  
 
     <div id="NamedayTab" class="tabcontent">
       <p>
@@ -74,11 +75,16 @@
 
     <div id="RangeTab" class="tabcontent">
       <p>
-        From:
-        <input id="startdate" type="date" data-date-format="DD-MM-YYYY">
-       To:
-        <input id="enddate" type="date">
-        <button type="button" onclick="getnamesdateRange()">Find Names</button>    
+        <div>
+          From:
+          <input id="startdate" type="date" data-date-format="DD-MM-YYYY">
+        </div>
+        <div>
+          To:
+          <input id="enddate" type="date">
+        </div>
+          <button type="button" onclick="getnamesdateRange()">Find Names</button>    
+        
       </p>    
       <div id="rangeresults"></div>
     </div>

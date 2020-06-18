@@ -39,13 +39,18 @@ function httpGetNameday(){
   request.onload = function() {
     var strResult="Result: ";
     var gotdata = JSON.parse(this.response)
-    for (var i = 0; i < gotdata.results.length; i++) {
-      strResult += gotdata.results[i].day;
-      strResult += " ";
-      strResult += months[gotdata.results[i].month-1];
-      strResult += "  ";
+    if (request.status >= 200 && request.status < 400) {
+      for (var i = 0; i < gotdata.results.length; i++) {
+        strResult += gotdata.results[i].day;
+        strResult += " ";
+        strResult += months[gotdata.results[i].month-1];
+        strResult += ";  ";
+      }
+      document.getElementById("namedayresults").innerHTML=strResult;
     }
-    document.getElementById("namedayresults").innerHTML=strResult;
+    else {
+      document.getElementById("namedayresults").innerHTML="Please, choose a valid date!";
+    }
   }
   request.send()
 }
@@ -72,7 +77,7 @@ function httpGetNames(){
         });
       }
       else {
-        document.getElementById("nameresults").innerHTML="Something went wrong with the GET request!";
+        document.getElementById("nameresults").innerHTML="Please, choose a valid date!";
       }
     }
   request.send()
